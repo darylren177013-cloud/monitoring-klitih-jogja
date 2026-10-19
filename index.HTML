@@ -1,0 +1,389 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curah Hujan Bulaksumur</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #eef6f8;
+            color: #222;
+        }
+
+        header {
+            background: #006d77;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+        nav {
+            background: #004f56;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .location {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            color: #006d77;
+            margin-bottom: 10px;
+        }
+
+        .nilai {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .status-rendah {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-sedang {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .status-tinggi {
+            color: red;
+            font-weight: bold;
+        }
+
+        .chart-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .chart {
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            border-left: 2px solid #333;
+            border-bottom: 2px solid #333;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .bar {
+            width: 45px;
+            background: #00a8cc;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+        }
+
+        .bar span {
+            position: absolute;
+            top: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .hari {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #006d77;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 13px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #004f56;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                display: block;
+                margin: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🌧️ Monitoring Curah Hujan</h1>
+        <p>Daerah Bulaksumur, Yogyakarta</p>
+    </header>
+
+    <nav>
+        <a href="#beranda">Beranda</a>
+        <a href="#grafik">Grafik</a>
+        <a href="#data">Data</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="beranda" class="location">
+            <h2>📍 Lokasi Pengamatan</h2>
+            <p>
+                Bulaksumur, Kabupaten Sleman, Daerah Istimewa Yogyakarta
+            </p>
+        </section>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>Curah Hujan</h2>
+                <div class="nilai" id="curahHujan">32 mm</div>
+                <p>Hari ini</p>
+            </div>
+
+            <div class="card">
+                <h2>Status</h2>
+                <div class="nilai status-sedang" id="status">
+                    Sedang
+                </div>
+                <p id="keterangan">
+                    Curah hujan sedang
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>Suhu</h2>
+                <div class="nilai">27°C</div>
+                <p>Perkiraan saat ini</p>
+            </div>
+
+        </div>
+
+        <section id="grafik" class="chart-box">
+            <h2>📊 Grafik Curah Hujan 7 Hari</h2>
+
+            <div class="chart">
+
+                <div>
+                    <div class="bar" style="height: 80px;">
+                        <span>20</span>
+                    </div>
+                    <div class="hari">Sen</div>
+                </div>
+
+                <div>
+                    <div class="bar" style="height: 150px;">
+                        <span>38</span>
+                    </div>
+                    <div class="hari">Sel</div>
+                </div>
+
+                <div>
+                    <div class="bar" style="height: 110px;">
+                        <span>27</span>
+                    </div>
+                    <div class="hari">Rab</div>
+                </div>
+
+                <div>
+                    <div class="bar" style="height: 220px;">
+                        <span>55</span>
+                    </div>
+                    <div class="hari">Kam</div>
+                </div>
+
+                <div>
+                    <div class="bar" style="height: 130px;">
+                        <span>33</span>
+                    </div>
+                    <div class="hari">Jum</div>
+                </div>
+
+                <div>
+                    <div class="bar" style="height: 180px;">
+                        <span>45</span>
+                    </div>
+                    <div class="hari">Sab</div>
+                </div>
+
+                <div>
+                    <div class="bar" style="height: 120px;">
+                        <span>30</span>
+                    </div>
+                    <div class="hari">Min</div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="data">
+            <h2>📋 Data Curah Hujan</h2>
+            <br>
+
+            <table>
+                <tr>
+                    <th>Hari</th>
+                    <th>Curah Hujan (mm)</th>
+                    <th>Kategori</th>
+                </tr>
+
+                <tr>
+                    <td>Senin</td>
+                    <td>20</td>
+                    <td>Rendah</td>
+                </tr>
+
+                <tr>
+                    <td>Selasa</td>
+                    <td>38</td>
+                    <td>Sedang</td>
+                </tr>
+
+                <tr>
+                    <td>Rabu</td>
+                    <td>27</td>
+                    <td>Sedang</td>
+                </tr>
+
+                <tr>
+                    <td>Kamis</td>
+                    <td>55</td>
+                    <td>Tinggi</td>
+                </tr>
+
+                <tr>
+                    <td>Jumat</td>
+                    <td>33</td>
+                    <td>Sedang</td>
+                </tr>
+
+                <tr>
+                    <td>Sabtu</td>
+                    <td>45</td>
+                    <td>Sedang</td>
+                </tr>
+
+                <tr>
+                    <td>Minggu</td>
+                    <td>30</td>
+                    <td>Sedang</td>
+                </tr>
+            </table>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Monitoring Curah Hujan Bulaksumur</p>
+        <p>Data merupakan contoh untuk keperluan pembelajaran.</p>
+    </footer>
+
+    <script>
+
+        // Data curah hujan
+        let curahHujan = 32;
+
+        // Menampilkan nilai curah hujan
+        document.getElementById("curahHujan").innerHTML =
+            curahHujan + " mm";
+
+
+        // Menentukan kategori curah hujan
+        let status = "";
+        let keterangan = "";
+
+        if (curahHujan < 20) {
+
+            status = "Rendah";
+            keterangan = "Curah hujan rendah";
+
+        } else if (curahHujan <= 50) {
+
+            status = "Sedang";
+            keterangan = "Curah hujan sedang";
+
+        } else {
+
+            status = "Tinggi";
+            keterangan = "Curah hujan tinggi";
+
+        }
+
+        // Menampilkan status
+        document.getElementById("status").innerHTML = status;
+        document.getElementById("keterangan").innerHTML = keterangan;
+
+    </script>
+
+</body>
+</html>
+```
